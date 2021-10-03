@@ -9,4 +9,10 @@ class UserRepository @Inject constructor(
   private val userDao: UserDao
 ) {
 
+  fun getUsers() = networkBoundResource(
+    query = { userDao.getUsers() },
+    fetch = { api.getUsers() },
+    saveFetchResult = { userDao.addUsers(it.data) },
+    shouldFetch = { it.isEmpty() }
+  )
 }

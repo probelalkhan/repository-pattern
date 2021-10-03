@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDao {
@@ -12,5 +13,5 @@ interface UserDao {
   suspend fun addUsers(users: List<User>)
 
   @Query("SELECT * FROM users")
-  suspend fun getUsers(): List<User>
+  fun getUsers(): Flow<List<User>>
 }
